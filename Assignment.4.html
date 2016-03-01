@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('App', [])
+        app.controller('Ctrl', function($scope) {
+            $scope.color = [
+                {color: 'Blue'},
+                {color: 'Black'},
+                {color: 'Grey'},
+                {color: 'Orange'},
+                {color: 'Purple'},
+                {color: 'White'},
+                {color: 'Brown'},
+                {color: 'Yellow'},
+                {color: 'Red'},
+                {color: 'Green'}
+            ];
+        });
+        app.filter('myFilter', function () {
+            return function (items) {
+                var filtered = [];
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    if (item.color.length <= 4) {
+                        filtered.push(item);
+                    }
+                }
+                return filtered;
+            }
+        });
+    </script>
+</head>
+<body ng-app="App">
+    <div ng-controller="Ctrl">
+        <span>Colors that are less than 5 letters long:</span>
+        <p ng-repeat="x in color | myFilter"><b>{{x.color}}</b></p>
+    </div>
+</body>
+</html>
